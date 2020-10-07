@@ -1,65 +1,80 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import Head from "next/head";
+import styles from "../styles/Home.module.css";
+import data from "../public/styleDatabase.js";
+import classNames from "classnames";
 
-export default function Home() {
-  return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+class Home extends React.Component {
+  constructor() {
+    super();
+    this.onKeyUp = this.onKeyUp.bind(this);
+  }
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+  onKeyUp(event) {
+    if (event.charCode === 13) {
+      this.search();
+    }
+  }
 
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
+  search() {
+    let input = document.getElementById("searchbar").value;
+    input = input.toLowerCase();
+    let x = document.getElementsByClassName("itemName");
+    let item = document.getElementsByClassName("item");
 
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
+    for (let i = 0; i < x.length; i++) {
+      if (!x[i].innerHTML.toLowerCase().includes(input)) {
+        return alert("Sorry, no results");
+      } else {
+        console.log(x[i]);
+        let table = document.getElementById("table");
+        table.style.display = "none";
+        let outerContainer = document.getElementById("outerContainer");
+        return outerContainer.appendChild(item[i]);
+      }
+    }
+  }
 
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+  render() {
+    return (
+      <div className={styles.container}>
+        <Head>
+          <title>Doen Database</title>
+        </Head>
+        <div className={styles.container}>
+          <div className={styles.nav}>
+            <h2>A Comprehensive, Searchable Database of DÔEN Products</h2>
+            <h6>More styles coming soon...</h6>
+            <input
+              type="text"
+              id="searchbar"
+              placeholder="Search.."
+              onKeyPress={this.onKeyUp}
+            />
+            <div>
+              <button
+                className={styles.clear}
+                onClick={() => window.location.reload(false)}
+              >
+                Clear results
+              </button>
+            </div>
+          </div>
+          <div id="outerContainer">
+            <div id="table" className={styles.table}>
+              {data.map((item, i) => (
+                <div className={classNames("item", styles.row)} key={i}>
+                  <div className={classNames("itemName", styles.text)}>
+                    <div>Style: {item.style}</div>
+                    <div>Color: {item.color}</div>
+                  </div>
+                  <img className={styles.image} src={item.photo} />
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
-    </div>
-  )
+      </div>
+    );
+  }
 }
+export default Home;
