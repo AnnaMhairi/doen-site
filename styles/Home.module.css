@@ -5,25 +5,13 @@
 }
 
 .nav {
-  padding-bottom: 1rem;
-}
-
-.clear {
-  height: 30px;
-  width: auto;
-  margin-top: 1rem;
-}
-
-.table {
-  border: 1px solid black;
+  padding-bottom: 2rem;
 }
 
 .row {
   display: flex;
   justify-content: space-between;
-  padding-bottom: 1rem;
   padding-top: 1rem;
-  border-bottom: 1px solid black;
 }
 
 .image {

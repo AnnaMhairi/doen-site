@@ -1,12 +1,30 @@
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
-import data from "../public/styleDatabase.js";
+import styleData from "../public/styleDatabase.js";
 import classNames from "classnames";
+import {
+  Alert,
+  AlertIcon,
+  AlertTitle,
+  AlertDescription,
+  Heading,
+  Button,
+  Input,
+  InputGroup,
+  IconButton,
+  Stack,
+  SimpleGrid,
+  Box,
+} from "@chakra-ui/core";
 
 class Home extends React.Component {
   constructor() {
     super();
+    this.state = {
+      showAlert: false,
+    };
     this.onKeyUp = this.onKeyUp.bind(this);
+    this.search = this.search.bind(this);
   }
 
   onKeyUp(event) {
@@ -15,21 +33,38 @@ class Home extends React.Component {
     }
   }
 
+  renderAlert() {
+    return (
+      <Alert status="error">
+        <AlertIcon />
+        Sorry, no results.
+      </Alert>
+    );
+  }
+
   search() {
+    this.setState({ showAlert: false });
     let input = document.getElementById("searchbar").value;
     input = input.toLowerCase();
-    let x = document.getElementsByClassName("itemName");
-    let item = document.getElementsByClassName("item");
 
-    for (let i = 0; i < x.length; i++) {
-      if (!x[i].innerHTML.toLowerCase().includes(input)) {
-        return alert("Sorry, no results");
-      } else {
-        console.log(x[i]);
-        let table = document.getElementById("table");
-        table.style.display = "none";
-        let outerContainer = document.getElementById("outerContainer");
-        return outerContainer.appendChild(item[i]);
+    let list = document.getElementById("table").innerHTML.toLowerCase();
+    let itemNames = document.getElementsByClassName("styleName");
+    let items = document.getElementsByClassName("item");
+    let table = document.getElementById("table");
+    let outerContainer = document.getElementById("outerContainer");
+
+    if (!list.includes(input)) {
+      return this.setState({ showAlert: true });
+    } else {
+      for (let i = 0; i < styleData.length; i++) {
+        if (
+          itemNames[i].childNodes[2].nodeValue.toLowerCase().includes(input)
+        ) {
+          table.style.display = "none";
+          return outerContainer.appendChild(items[i]);
+        } else {
+          continue;
+        }
       }
     }
   }
@@ -42,34 +77,58 @@ class Home extends React.Component {
         </Head>
         <div className={styles.container}>
           <div className={styles.nav}>
-            <h2>A Comprehensive, Searchable Database of DÔEN Products</h2>
-            <h6>More styles coming soon...</h6>
-            <input
-              type="text"
-              id="searchbar"
-              placeholder="Search.."
-              onKeyPress={this.onKeyUp}
-            />
-            <div>
-              <button
-                className={styles.clear}
-                onClick={() => window.location.reload(false)}
-              >
-                Clear results
-              </button>
-            </div>
+            <Stack spacing={4}>
+              <Heading>The DÔEN Style Database</Heading>
+              <InputGroup>
+                <Input
+                  type="text"
+                  id="searchbar"
+                  placeholder="Search.."
+                  onKeyPress={this.onKeyUp}
+                />
+                <IconButton
+                  aria-label="Search database"
+                  icon="search"
+                  onClick={() => this.search()}
+                />
+              </InputGroup>
+              <div>
+                <Button
+                  className={styles.clear}
+                  variantColor="teal"
+                  size="sm"
+                  onClick={() => window.location.reload(false)}
+                >
+                  Clear results
+                </Button>
+              </div>
+              {this.state.showAlert && this.renderAlert()}
+            </Stack>
           </div>
           <div id="outerContainer">
-            <div id="table" className={styles.table}>
-              {data.map((item, i) => (
-                <div className={classNames("item", styles.row)} key={i}>
-                  <div className={classNames("itemName", styles.text)}>
-                    <div>Style: {item.style}</div>
-                    <div>Color: {item.color}</div>
-                  </div>
-                  <img className={styles.image} src={item.photo} />
-                </div>
-              ))}
+            <div id="table">
+              <SimpleGrid
+                columns={2}
+                spacing={10}
+                id="table"
+                className={styles.table}
+              >
+                {styleData.map((item, i) => (
+                  <Box
+                    className={classNames("item", styles.row)}
+                    key={i}
+                    p={5}
+                    shadow="md"
+                    borderWidth="1px"
+                  >
+                    <div className={classNames("styleBox", styles.text)}>
+                      <div className="styleName">Style: {item.style}</div>
+                      <div>Color: {item.color}</div>
+                    </div>
+                    <img className={styles.image} src={item.photo} />
+                  </Box>
+                ))}
+              </SimpleGrid>
             </div>
           </div>
         </div>

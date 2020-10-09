@@ -1,4 +1,4 @@
-const data = [
+const styleData = [
   {
     style: "Odessa Dress",
     photo:
@@ -444,4 +444,4 @@ const data = [
   },
 ];
 
-export default data;
+export default styleData;
