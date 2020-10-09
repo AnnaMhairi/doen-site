@@ -15,7 +15,10 @@ import {
   Stack,
   SimpleGrid,
   Box,
+  Link,
+  Icon,
 } from "@chakra-ui/core";
+import logo from "../public/logo.png";
 
 class Home extends React.Component {
   constructor() {
@@ -71,14 +74,17 @@ class Home extends React.Component {
 
   render() {
     return (
-      <div className={styles.container}>
+      <div className={styles.topContainer}>
         <Head>
           <title>Doen Database</title>
         </Head>
+        <img className={styles.doenLogo} src={logo} />
         <div className={styles.container}>
           <div className={styles.nav}>
             <Stack spacing={4}>
-              <Heading>The DÔEN Style Database</Heading>
+              <Heading className={styles.header}>
+                The DÔEN Style Database
+              </Heading>
               <InputGroup>
                 <Input
                   type="text"
@@ -124,6 +130,14 @@ class Home extends React.Component {
                     <div className={classNames("styleBox", styles.text)}>
                       <div className="styleName">Style: {item.style}</div>
                       <div>Color: {item.color}</div>
+                      <Link
+                        href={`https://google.com/search?q=doen+${
+                          item.style.split(" ")[0]
+                        }+${item.style.split(" ")[1]}`}
+                        isExternal
+                      >
+                        Find it <Icon name="external-link" mx="2px" />
+                      </Link>
                     </div>
                     <img className={styles.image} src={item.photo} />
                   </Box>

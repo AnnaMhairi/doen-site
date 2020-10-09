@@ -1,11 +1,23 @@
+.topContainer {
+  padding: 3rem 0;
+}
+
 .container {
   max-width: 900px;
   margin: 0 auto;
-  padding: 3rem 0;
+}
+
+.doenLogo {
+  margin: 0 auto;
 }
 
 .nav {
   padding-bottom: 2rem;
+}
+
+.header {
+  padding-top: 1rem;
+  text-align: center;
 }
 
 .row {
