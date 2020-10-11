@@ -2,17 +2,38 @@
   padding: 3rem 0;
 }
 
+@media screen and (max-width: 768px) {
+  .topContainer {
+    padding: 2rem 1rem;
+  }
+}
+
 .container {
   max-width: 900px;
   margin: 0 auto;
 
-  @media only screen and (max-width: 900px) {
+  @media screen and (max-width: 900px) {
     padding: 0 3rem;
   }
 }
 
 .doenLogo {
   margin: 0 auto;
+}
+
+@media screen and (max-width: 768px) {
+  .heading,
+  .buttonGroup {
+    font-size: 10px;
+  }
+
+  .buttonGroup {
+    flex-direction: column;
+  }
+
+  .buttonGroup button {
+    margin-bottom: 0.5rem;
+  }
 }
 
 .subHeading {
