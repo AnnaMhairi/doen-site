@@ -5,19 +5,36 @@
 .container {
   max-width: 900px;
   margin: 0 auto;
+
+  @media only screen and (max-width: 900px) {
+    padding: 0 3rem;
+  }
 }
 
 .doenLogo {
   margin: 0 auto;
 }
 
+.subHeading {
+  text-align: center;
+}
+
 .nav {
   padding-bottom: 2rem;
 }
 
-.header {
-  padding-top: 1rem;
-  text-align: center;
+.innerNav {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 2rem;
+}
+
+.buttonGroup {
+  display: flex;
+}
+
+.communityBtn {
+  margin-right: 1rem;
 }
 
 .row {
@@ -30,6 +47,7 @@
   margin-right: 1rem;
   height: 150px;
   width: auto;
+  cursor: pointer;
 }
 
 .text {

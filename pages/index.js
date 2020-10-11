@@ -16,9 +16,11 @@ import {
   SimpleGrid,
   Box,
   Link,
+  Flex,
   Icon,
 } from "@chakra-ui/core";
 import logo from "../public/logo.png";
+import NextLink from "next/link";
 
 class Home extends React.Component {
   constructor() {
@@ -78,12 +80,26 @@ class Home extends React.Component {
         <Head>
           <title>Doen Database</title>
         </Head>
-        <img className={styles.doenLogo} src={logo} />
         <div className={styles.container}>
           <div className={styles.nav}>
+            <div className={styles.innerNav}>
+              <div className={styles.header}>DÔEN Directory</div>
+              <div className={styles.buttonGroup}>
+                <NextLink href="https://discourse.doendirectory.com">
+                  <Button className={styles.communityBtn} size="sm">
+                    Join the Community!
+                  </Button>
+                </NextLink>
+                <NextLink href="https://discourse.doendirectory.com">
+                  <Button className={styles.communityBtn} size="sm">
+                    Discuss
+                  </Button>
+                </NextLink>
+              </div>
+            </div>
             <Stack spacing={4}>
-              <Heading className={styles.header}>
-                The DÔEN Style Database
+              <Heading className={styles.subHeading} as="h3" size="lg">
+                Search for and discover every DÔEN style
               </Heading>
               <InputGroup>
                 <Input
@@ -101,7 +117,6 @@ class Home extends React.Component {
               <div>
                 <Button
                   className={styles.clear}
-                  variantColor="teal"
                   size="sm"
                   onClick={() => window.location.reload(false)}
                 >
@@ -114,7 +129,7 @@ class Home extends React.Component {
           <div id="outerContainer">
             <div id="table">
               <SimpleGrid
-                columns={2}
+                columns={[1, null, 2]}
                 spacing={10}
                 id="table"
                 className={styles.table}
