@@ -165,15 +165,11 @@ class Home extends React.Component {
                         </div>
                       </div>
                       <div className={styles.styleBoxBtm}>
-                        <Button
-                          variant="outline"
-                          leftIcon="chat"
-                          size="sm"
-                          href={`https://discourse.doendirectory.com/c/doen/doen-directory/7`}
-                          isExternal
-                        >
-                          Discuss
-                        </Button>
+                        <NextLink href="https://discourse.doendirectory.com/c/doen/doen-directory/7">
+                          <Button variant="outline" leftIcon="chat" size="sm">
+                            Discuss
+                          </Button>
+                        </NextLink>
                       </div>
                     </div>
                     <img className={styles.image} src={item.photo} />
