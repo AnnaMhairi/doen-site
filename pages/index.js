@@ -18,6 +18,7 @@ import {
   Link,
   Flex,
   Icon,
+  Tag,
 } from "@chakra-ui/core";
 import logo from "../public/logo.png";
 import NextLink from "next/link";
@@ -78,6 +79,11 @@ class Home extends React.Component {
     return (
       <div className={styles.topContainer}>
         <Head>
+          <link
+            href="https://fonts.googleapis.com/css2?family=Lobster&Abril+Fatface&family=Poppins&display=swap"
+            rel="stylesheet"
+          />
+
           <title>Doen Database</title>
         </Head>
         <div className={styles.container}>
@@ -86,21 +92,26 @@ class Home extends React.Component {
               <div className={styles.header}>DÔEN Directory</div>
               <div className={styles.buttonGroup}>
                 <NextLink href="https://discourse.doendirectory.com">
-                  <Button className={styles.communityBtn} size="sm">
-                    Join the Community!
+                  <Button
+                    variant="ghost"
+                    display={{ small: "none" }}
+                    className={styles.communityBtn}
+                    size="sm"
+                  >
+                    Discuss
                   </Button>
                 </NextLink>
                 <NextLink href="https://discourse.doendirectory.com">
-                  <Button className={styles.communityBtn} size="sm">
-                    Discuss
+                  <Button backgroundColor={"pink"} size="sm">
+                    Join the Community!
                   </Button>
                 </NextLink>
               </div>
             </div>
             <Stack spacing={4}>
-              <Heading className={styles.subHeading} as="h3" size="lg">
+              <div className={styles.subHeading}>
                 Search for and discover every DÔEN style
-              </Heading>
+              </div>
               <InputGroup>
                 <Input
                   type="text"
@@ -116,6 +127,7 @@ class Home extends React.Component {
               </InputGroup>
               <div>
                 <Button
+                  variant="link"
                   className={styles.clear}
                   size="sm"
                   onClick={() => window.location.reload(false)}
@@ -128,9 +140,10 @@ class Home extends React.Component {
           </div>
           <div id="outerContainer">
             <div id="table">
+              <div className={styles.gridTitle}>All styles</div>
               <SimpleGrid
                 columns={[1, null, 2]}
-                spacing={10}
+                spacing={7}
                 id="table"
                 className={styles.table}
               >
@@ -138,21 +151,39 @@ class Home extends React.Component {
                   <Box
                     className={classNames("item", styles.row)}
                     key={i}
-                    p={5}
+                    p={(2, 3, 5)}
                     shadow="md"
                     borderWidth="1px"
                   >
                     <div className={classNames("styleBox", styles.text)}>
-                      <div className="styleName">Style: {item.style}</div>
-                      <div>Color: {item.color}</div>
-                      <Link
-                        href={`https://google.com/search?q=doen+${
-                          item.style.split(" ")[0]
-                        }+${item.style.split(" ")[1]}`}
-                        isExternal
-                      >
-                        Find it <Icon name="external-link" mx="2px" />
-                      </Link>
+                      <div className={styles.styleBoxTop}>
+                        <div
+                          className={classNames("styleName", styles.itemText)}
+                        >
+                          {item.style}
+                        </div>
+                        <div>
+                          <Tag
+                            className={styles.colorTag}
+                            size="md"
+                            variant="solid"
+                            backgroundColor="pink"
+                            color="black"
+                          >
+                            {item.color}
+                          </Tag>
+                        </div>
+                      </div>
+                      <div className={styles.styleBoxBtm}>
+                        <Link
+                          href={`https://google.com/search?q=doen+${
+                            item.style.split(" ")[0]
+                          }+${item.style.split(" ")[1]}`}
+                          isExternal
+                        >
+                          Find it <Icon name="external-link" mx="2px" />
+                        </Link>
+                      </div>
                     </div>
                     <img className={styles.image} src={item.photo} />
                   </Box>
