@@ -92,16 +92,6 @@ class Home extends React.Component {
               <div className={styles.header}>DÔEN Directory</div>
               <div className={styles.buttonGroup}>
                 <NextLink href="https://discourse.doendirectory.com">
-                  <Button
-                    variant="ghost"
-                    display={{ small: "none" }}
-                    className={styles.communityBtn}
-                    size="sm"
-                  >
-                    Discuss
-                  </Button>
-                </NextLink>
-                <NextLink href="https://discourse.doendirectory.com">
                   <Button backgroundColor={"pink"} size="sm">
                     Join the Community!
                   </Button>
@@ -175,14 +165,15 @@ class Home extends React.Component {
                         </div>
                       </div>
                       <div className={styles.styleBoxBtm}>
-                        <Link
-                          href={`https://google.com/search?q=doen+${
-                            item.style.split(" ")[0]
-                          }+${item.style.split(" ")[1]}`}
+                        <Button
+                          variant="outline"
+                          leftIcon="chat"
+                          size="sm"
+                          href={`https://discourse.doendirectory.com/c/doen/doen-directory/7`}
                           isExternal
                         >
-                          Find it <Icon name="external-link" mx="2px" />
-                        </Link>
+                          Discuss
+                        </Button>
                       </div>
                     </div>
                     <img className={styles.image} src={item.photo} />
