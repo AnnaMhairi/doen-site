@@ -137,7 +137,7 @@ class Home extends React.Component {
                 id="table"
                 className={styles.table}
               >
-                {styleData.map((item, i) => (
+                {styleData.reverse().map((item, i) => (
                   <Box
                     className={classNames("item", styles.row)}
                     key={i}
