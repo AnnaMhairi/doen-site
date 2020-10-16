@@ -64,7 +64,7 @@ class Home extends React.Component {
     } else {
       for (let i = 0; i < styleData.length; i++) {
         if (
-          itemNames[i].childNodes[2].nodeValue.toLowerCase().includes(input)
+          itemNames[i].childNodes[0].nodeValue.toLowerCase().includes(input)
         ) {
           table.style.display = "none";
           return outerContainer.appendChild(items[i]);
