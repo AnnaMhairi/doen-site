@@ -137,7 +137,7 @@ class Home extends React.Component {
                 id="table"
                 className={styles.table}
               >
-                {styleData.reverse().map((item, i) => (
+                {styleData.map((item, i) => (
                   <Box
                     className={classNames("item", styles.row)}
                     key={i}
@@ -153,20 +153,29 @@ class Home extends React.Component {
                           {item.style}
                         </div>
                         <div>
-                          <Tag
-                            className={styles.colorTag}
-                            size="md"
-                            variant="solid"
-                            backgroundColor="pink"
-                            color="black"
-                          >
-                            {item.color}
-                          </Tag>
+                          {item.color.map((colorTag, i) => (
+                            <Tag
+                              className={styles.colorTag}
+                              size="md"
+                              variant="solid"
+                              backgroundColor="white"
+                              variant="outline"
+                              color="black"
+                              key={i}
+                            >
+                              {colorTag}
+                            </Tag>
+                          ))}
                         </div>
                       </div>
                       <div className={styles.styleBoxBtm}>
                         <NextLink href="https://discourse.doendirectory.com/c/doen/doen-directory/7">
-                          <Button variant="outline" leftIcon="chat" size="sm">
+                          <Button
+                            variant="solid"
+                            leftIcon="chat"
+                            size="sm"
+                            backgroundColor="pink"
+                          >
                             Discuss
                           </Button>
                         </NextLink>
